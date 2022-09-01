@@ -1,14 +1,19 @@
 {
-	"configurations": [
-		{
-			"name": "MyFirstRPGEditor Editor Win64 Development (MyFirstRPG)",
-			"intelliSenseMode": "msvc-x64",
-			"compileCommands": "C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\.vscode\\compileCommands_MyFirstRPG.json"
-		},
-		{
-			"name": "Win32",
-			"intelliSenseMode": "msvc-x64",
-			"compileCommands": "C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\.vscode\\compileCommands_Default.json"
-		}
-	]
+    "configurations": [
+        {
+            "name": "MyFirstRPGEditor Editor Win64 Development (MyFirstRPG)",
+            "intelliSenseMode": "msvc-x64",
+            "compileCommands": "C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\.vscode\\compileCommands_MyFirstRPG.json",
+            "cStandard": "c17",
+            "cppStandard": "c++17"
+        },
+        {
+            "name": "Win32",
+            "intelliSenseMode": "msvc-x64",
+            "compileCommands": "C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\.vscode\\compileCommands_Default.json",
+            "cStandard": "c17",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
 }
