@@ -1,0 +1,707 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "MyFirstRPG Win64 Debug Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPG",
+				"Win64",
+				"Debug",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG Win64 Debug Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPG",
+				"Win64",
+				"Debug",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MyFirstRPG Win64 Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG Win64 Debug Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MyFirstRPG",
+				"Win64",
+				"Debug",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG Win64 DebugGame Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPG",
+				"Win64",
+				"DebugGame",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG Win64 DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPG",
+				"Win64",
+				"DebugGame",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MyFirstRPG Win64 DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG Win64 DebugGame Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MyFirstRPG",
+				"Win64",
+				"DebugGame",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG Win64 Development Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPG",
+				"Win64",
+				"Development",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG Win64 Development Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPG",
+				"Win64",
+				"Development",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MyFirstRPG Win64 Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG Win64 Development Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MyFirstRPG",
+				"Win64",
+				"Development",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG Win64 Test Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPG",
+				"Win64",
+				"Test",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG Win64 Test Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPG",
+				"Win64",
+				"Test",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MyFirstRPG Win64 Test Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG Win64 Test Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MyFirstRPG",
+				"Win64",
+				"Test",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG Win64 Shipping Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPG",
+				"Win64",
+				"Shipping",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG Win64 Shipping Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPG",
+				"Win64",
+				"Shipping",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MyFirstRPG Win64 Shipping Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG Win64 Shipping Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MyFirstRPG",
+				"Win64",
+				"Shipping",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG HoloLens Debug Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPG",
+				"HoloLens",
+				"Debug",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG HoloLens Debug Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPG",
+				"HoloLens",
+				"Debug",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MyFirstRPG HoloLens Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG HoloLens Debug Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MyFirstRPG",
+				"HoloLens",
+				"Debug",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG HoloLens DebugGame Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPG",
+				"HoloLens",
+				"DebugGame",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG HoloLens DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPG",
+				"HoloLens",
+				"DebugGame",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MyFirstRPG HoloLens DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG HoloLens DebugGame Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MyFirstRPG",
+				"HoloLens",
+				"DebugGame",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG HoloLens Development Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPG",
+				"HoloLens",
+				"Development",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG HoloLens Development Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPG",
+				"HoloLens",
+				"Development",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MyFirstRPG HoloLens Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG HoloLens Development Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MyFirstRPG",
+				"HoloLens",
+				"Development",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG HoloLens Test Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPG",
+				"HoloLens",
+				"Test",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG HoloLens Test Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPG",
+				"HoloLens",
+				"Test",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MyFirstRPG HoloLens Test Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG HoloLens Test Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MyFirstRPG",
+				"HoloLens",
+				"Test",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG HoloLens Shipping Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPG",
+				"HoloLens",
+				"Shipping",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG HoloLens Shipping Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPG",
+				"HoloLens",
+				"Shipping",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MyFirstRPG HoloLens Shipping Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPG HoloLens Shipping Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MyFirstRPG",
+				"HoloLens",
+				"Shipping",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPGEditor Win64 Debug Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPGEditor",
+				"Win64",
+				"Debug",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPGEditor Win64 Debug Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPGEditor",
+				"Win64",
+				"Debug",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MyFirstRPGEditor Win64 Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPGEditor Win64 Debug Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MyFirstRPGEditor",
+				"Win64",
+				"Debug",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPGEditor Win64 DebugGame Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPGEditor",
+				"Win64",
+				"DebugGame",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPGEditor Win64 DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPGEditor",
+				"Win64",
+				"DebugGame",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MyFirstRPGEditor Win64 DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPGEditor Win64 DebugGame Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MyFirstRPGEditor",
+				"Win64",
+				"DebugGame",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPGEditor Win64 Development Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPGEditor",
+				"Win64",
+				"Development",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPGEditor Win64 Development Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"MyFirstRPGEditor",
+				"Win64",
+				"Development",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"MyFirstRPGEditor Win64 Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "MyFirstRPGEditor Win64 Development Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"MyFirstRPGEditor",
+				"Win64",
+				"Development",
+				"C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\MyFirstRPG.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		}
+	]
+}
