@@ -11,8 +11,17 @@ class AMyFirstRPGGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
+	virtual void BeginPlay() override;
+
 public:
 	AMyFirstRPGGameMode();
+
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Stat", Meta = (BlueprintProtected = "true"))
+	TSubclassOf<class UUserWidget> PlayerHUDClass;
+
+	UPROPERTY()
+	class UUserWidget* CurrentWidget;
 };
 
 

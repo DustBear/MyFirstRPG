@@ -33,5 +33,15 @@
 		"file": "C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\Source\\MyFirstRPG\\MyFirstRPGGameMode.h",
 		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\.vscode\\compileCommands_MyFirstRPG\\MyFirstRPG.211.rsp",
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\Source\\MyFirstRPG\\PlayerAnim.cpp",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\.vscode\\compileCommands_MyFirstRPG\\MyFirstRPG.211.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\Source\\MyFirstRPG\\PlayerAnim.h",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\.vscode\\compileCommands_MyFirstRPG\\MyFirstRPG.211.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
 	}
 ]

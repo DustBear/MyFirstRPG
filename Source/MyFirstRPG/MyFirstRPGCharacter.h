@@ -25,6 +25,39 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Input)
 	float TurnRateGamepad;
 
+	UFUNCTION(BlueprintPure, Category = "Level")
+	int32 GetCurrentLevel() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Level")
+	void UpdateCurrentLevel();
+
+	UFUNCTION(BlueprintPure, Category = "Health")
+	float GetCurrentHealth() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Health")
+	void UpdateCurrentHealth(float Health);
+
+	UFUNCTION(BlueprintPure, Category = "Health")
+	float GetMaxHealth() const;
+
+	UFUNCTION(BlueprintPure, Category = "Mana")
+	float GetCurrentMana() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Mana")
+	void UpdateCurrentMana(float Mana);
+
+	UFUNCTION(BlueprintPure, Category = "Mana")
+	float GetMaxMana() const;
+
+	UFUNCTION(BlueprintPure, Category = "Exp")
+	float GetCurrentExp() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Exp")
+	void UpdateCurrentExp(float Exp);
+
+	UFUNCTION(BlueprintPure, Category = "Exp")
+	float GetMaxExp() const;
+
 protected:
 
 	/** Called for forwards/backward input */
@@ -55,6 +88,43 @@ protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	// End of APawn interface
+
+private:
+	UPROPERTY(EditAnywhere, Category = "Stat")
+	FName Name;
+
+	UPROPERTY(EditAnywhere, Category = "Stat")
+	int32 CurrentLevel;
+
+	UPROPERTY(EditAnywhere, Category = "Stat")
+	float CurrentHealth;
+
+	UPROPERTY(EditAnywhere, Category = "Stat")
+	float MaxHealth;
+
+	UPROPERTY(EditAnywhere, Category = "Stat")
+	float CurrentMana;
+
+	UPROPERTY(EditAnywhere, Category = "Stat")
+	float MaxMana;
+
+	UPROPERTY(EditAnywhere, Category = "Stat")
+	float CurrentExp;
+
+	UPROPERTY(EditAnywhere, Category = "Stat")
+	float MaxExp;
+
+	UPROPERTY(EditAnywhere, Category = "Stat")
+	int32 Strength;
+
+	UPROPERTY(EditAnywhere, Category = "Stat")
+	int32 Defense;
+
+	UPROPERTY(EditAnywhere, Category = "Stat")
+	int32 SwordModifier;
+
+	UPROPERTY(EditAnywhere, Category = "Stat")
+	int32 ShieldModifier;
 
 public:
 	/** Returns CameraBoom subobject **/

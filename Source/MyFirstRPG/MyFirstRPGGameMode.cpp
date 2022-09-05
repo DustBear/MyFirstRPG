@@ -3,6 +3,9 @@
 #include "MyFirstRPGGameMode.h"
 #include "MyFirstRPGCharacter.h"
 #include "UObject/ConstructorHelpers.h"
+#include "Blueprint/UserWidget.h"
+#include "Kismet/GameplayStatics.h"
+
 
 AMyFirstRPGGameMode::AMyFirstRPGGameMode()
 {
@@ -12,4 +15,15 @@ AMyFirstRPGGameMode::AMyFirstRPGGameMode()
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
+}
+
+void AMyFirstRPGGameMode::BeginPlay()
+{
+	Super::BeginPlay();
+
+ 	checkf(PlayerHUDClass != nullptr, TEXT("PlayerHUDClass is nullptr"));
+ 	CurrentWidget = CreateWidget<UUserWidget>(GetWorld(), PlayerHUDClass);
+	
+ 	checkf(CurrentWidget != nullptr, TEXT("CurrentWidget is nullptr"));
+ 	CurrentWidget->AddToViewport();
 }

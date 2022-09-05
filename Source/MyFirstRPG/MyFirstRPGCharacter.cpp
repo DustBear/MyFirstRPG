@@ -127,3 +127,70 @@ void AMyFirstRPGCharacter::MoveRight(float Value)
 		AddMovementInput(Direction, Value);
 	}
 }
+
+int AMyFirstRPGCharacter::GetCurrentLevel() const
+{
+	return CurrentLevel;
+}
+
+void AMyFirstRPGCharacter::UpdateCurrentLevel()
+{
+	CurrentLevel++;
+}
+
+float AMyFirstRPGCharacter::GetCurrentHealth() const
+{
+	return CurrentHealth;
+}
+
+void AMyFirstRPGCharacter::UpdateCurrentHealth(float Health)
+{
+	CurrentHealth += Health;
+	if (CurrentHealth > MaxHealth)
+	{
+		CurrentHealth = MaxHealth;
+	}
+}
+
+float AMyFirstRPGCharacter::GetMaxHealth() const
+{
+	return MaxHealth;
+}
+
+float AMyFirstRPGCharacter::GetCurrentMana() const
+{
+	return CurrentMana;
+}
+
+void AMyFirstRPGCharacter::UpdateCurrentMana(float Mana)
+{
+	CurrentMana += Mana;
+	if (CurrentMana > MaxMana)
+	{
+		CurrentMana = MaxMana;
+	}
+}
+
+float AMyFirstRPGCharacter::GetMaxMana() const
+{
+	return MaxMana;
+}
+
+float AMyFirstRPGCharacter::GetCurrentExp() const
+{
+	return CurrentExp;
+}
+
+void AMyFirstRPGCharacter::UpdateCurrentExp(float Exp)
+{
+	CurrentExp += Exp;
+	if (CurrentExp > MaxExp)
+	{
+		CurrentExp = MaxExp;
+	}
+}
+
+float AMyFirstRPGCharacter::GetMaxExp() const
+{
+	return MaxExp;
+}
