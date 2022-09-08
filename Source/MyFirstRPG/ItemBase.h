@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Engine/Texture2D.h"
 #include "Engine/DataTable.h"
+#include "InteractInterface.h"
 #include "ItemBase.generated.h"
 
 UENUM(BlueprintType)
@@ -50,7 +51,7 @@ public:
 };
 
 UCLASS()
-class MYFIRSTRPG_API AItemBase : public AActor
+class MYFIRSTRPG_API AItemBase : public AActor, public IInteractInterface
 {
 	GENERATED_BODY()
 	
@@ -77,4 +78,6 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	virtual void Interact() override;
 };

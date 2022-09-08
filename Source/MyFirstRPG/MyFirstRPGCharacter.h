@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "ItemBase.h"
+#include "Components/SphereComponent.h"
 #include "MyFirstRPGCharacter.generated.h"
 
 UCLASS(config=Game)
@@ -25,11 +27,13 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Input)
 	float TurnRateGamepad;
 
+	// 플레이어 스탯
 	UFUNCTION(BlueprintPure, Category = "Level")
 	int32 GetCurrentLevel() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Level")
 	void UpdateCurrentLevel();
+
 
 	UFUNCTION(BlueprintPure, Category = "Health")
 	float GetCurrentHealth() const;
@@ -40,6 +44,7 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Health")
 	float GetMaxHealth() const;
 
+
 	UFUNCTION(BlueprintPure, Category = "Mana")
 	float GetCurrentMana() const;
 
@@ -48,6 +53,7 @@ public:
 
 	UFUNCTION(BlueprintPure, Category = "Mana")
 	float GetMaxMana() const;
+
 
 	UFUNCTION(BlueprintPure, Category = "Exp")
 	float GetCurrentExp() const;
@@ -58,8 +64,20 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Exp")
 	float GetMaxExp() const;
 
-protected:
+	// 상호작용
+	UPROPERTY(EditAnywhere)
+    USphereComponent* SphereCollider;
 
+	UFUNCTION(BlueprintCallable, Category = "Interact")
+	void PickUpItem(FItemInfo ItemInfo);
+
+	UFUNCTION()
+  	void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
+  	void OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+protected:
 	/** Called for forwards/backward input */
 	void MoveForward(float Value);
 
@@ -84,10 +102,14 @@ protected:
 	/** Handler for when a touch input stops. */
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
 
+	void StartInteract();
+
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	// End of APawn interface
+
+	virtual void BeginPlay() override;
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Stat")
@@ -125,6 +147,9 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Stat")
 	int32 ShieldModifier;
+
+	UPROPERTY()
+	TArray<AActor*> Interactables;
 
 public:
 	/** Returns CameraBoom subobject **/

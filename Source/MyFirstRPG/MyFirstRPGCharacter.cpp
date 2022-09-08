@@ -75,6 +75,9 @@ void AMyFirstRPGCharacter::SetupPlayerInputComponent(class UInputComponent* Play
 	// handle touch devices
 	PlayerInputComponent->BindTouch(IE_Pressed, this, &AMyFirstRPGCharacter::TouchStarted);
 	PlayerInputComponent->BindTouch(IE_Released, this, &AMyFirstRPGCharacter::TouchStopped);
+
+	// 추가한 key bindings
+	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AMyFirstRPGCharacter::StartInteract);
 }
 
 void AMyFirstRPGCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
@@ -125,6 +128,27 @@ void AMyFirstRPGCharacter::MoveRight(float Value)
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 		// add movement in that direction
 		AddMovementInput(Direction, Value);
+	}
+}
+
+void AMyFirstRPGCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	SphereCollider = Cast<USphereComponent>(GetComponentByClass(USphereComponent::StaticClass()));
+	SphereCollider->OnComponentBeginOverlap.AddDynamic(this, &AMyFirstRPGCharacter::OnOverlapBegin);
+	SphereCollider->OnComponentEndOverlap.AddDynamic(this, &AMyFirstRPGCharacter::OnOverlapEnd);
+
+}
+
+void AMyFirstRPGCharacter::StartInteract()
+{
+	if (Interactables.IsEmpty()) return;
+	AActor* Interactable = *Interactables.GetData();
+	IInteractInterface* InteractInterface = Cast<IInteractInterface>(Interactable);
+	if (InteractInterface)
+	{
+		InteractInterface->Interact();
 	}
 }
 
@@ -193,4 +217,32 @@ void AMyFirstRPGCharacter::UpdateCurrentExp(float Exp)
 float AMyFirstRPGCharacter::GetMaxExp() const
 {
 	return MaxExp;
+}
+
+void AMyFirstRPGCharacter::PickUpItem(FItemInfo ItemInfo)
+{
+	
+}
+
+// Interactable한 Actor와 overlap되면 Interactables라는 Array에 그것을 추가
+void AMyFirstRPGCharacter::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherActor && (OtherActor != this) && OtherComp) 
+	{
+		if (OtherActor->GetClass()->ImplementsInterface(UInteractInterface::StaticClass()))
+		{
+			Interactables.AddUnique(OtherActor);
+		}
+	}
+}
+
+void AMyFirstRPGCharacter::OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	if (OtherActor && (OtherActor != this) && OtherComp) 
+	{
+		if (OtherActor->GetClass()->ImplementsInterface(UInteractInterface::StaticClass()))
+		{
+			Interactables.Remove(OtherActor);
+		}
+	}
 }
