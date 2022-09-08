@@ -219,9 +219,31 @@ float AMyFirstRPGCharacter::GetMaxExp() const
 	return MaxExp;
 }
 
-void AMyFirstRPGCharacter::PickUpItem(FItemInfo ItemInfo)
+void AMyFirstRPGCharacter::PickUpItem(const FItemInfo& PickItemInfo)
 {
-	
+	// 주운 아이템이 인벤토리에 있는지 확인
+	int32 ItemIndex = -1;
+	for (const FItemInfo& InvenItemInfo : Inventory)
+	{
+		if (InvenItemInfo.Name == PickItemInfo.Name && InvenItemInfo.CurrentStack < InvenItemInfo.MaxStack)
+		{
+			ItemIndex = InvenItemInfo.Index;
+			break;
+		}
+	}
+
+	// 없다면?
+	if (ItemIndex == -1)
+	{
+		FItemInfo newItemInfo = PickItemInfo;
+		int32 Index = Inventory.Add(newItemInfo);
+		newItemInfo.Index = Index;
+	}
+	// 있다면?
+	else
+	{
+		Inventory[ItemIndex].CurrentStack++;
+	}
 }
 
 // Interactable한 Actor와 overlap되면 Interactables라는 Array에 그것을 추가
