@@ -7,6 +7,7 @@
 #include "Engine/Texture2D.h"
 #include "Engine/DataTable.h"
 #include "InteractInterface.h"
+#include "Kismet/GameplayStatics.h"
 #include "ItemBase.generated.h"
 
 UENUM(BlueprintType)
@@ -18,12 +19,12 @@ enum class EItemNames : uint8
 { HealthPotion, ManaPotion, RustedSword, IronSword, WoodShield, IronShield };
 
 USTRUCT(BlueprintType)
-struct FItemInfo : public FTableRowBase
+struct FItemDataTable : public FTableRowBase
 {
 	GENERATED_BODY()
 
 public:
-	FItemInfo() {}
+	FItemDataTable() {}
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	EItemNames Name;
@@ -50,6 +51,21 @@ public:
 	int32 SelfValue;
 };
 
+USTRUCT(BlueprintType)
+struct FItemInfo
+{
+	GENERATED_BODY()
+
+public:
+	FItemInfo() {}
+
+	UPROPERTY(BlueprintReadOnly)
+	FItemDataTable ItemDataTable;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UTexture2D* ItemImage;
+};
+
 UCLASS()
 class MYFIRSTRPG_API AItemBase : public AActor, public IInteractInterface
 {
@@ -70,9 +86,6 @@ protected:
 	EItemNames RowName;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	UTexture2D* ItemImage;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	FItemInfo ItemInfo;
 
 public:	

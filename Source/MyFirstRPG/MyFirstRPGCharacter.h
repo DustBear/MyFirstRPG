@@ -6,6 +6,9 @@
 #include "GameFramework/Character.h"
 #include "ItemBase.h"
 #include "Components/SphereComponent.h"
+#include "Blueprint/UserWidget.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
+#include "UObject/ConstructorHelpers.h"
 #include "MyFirstRPGCharacter.generated.h"
 
 UCLASS(config=Game)
@@ -77,6 +80,12 @@ public:
 	UFUNCTION()
   	void OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
+	UPROPERTY()
+	TArray<FItemInfo> Inventory;
+	
+	UPROPERTY(BlueprintReadOnly)
+	FItemInfo ItemSelected;
+	
 protected:
 	/** Called for forwards/backward input */
 	void MoveForward(float Value);
@@ -103,6 +112,12 @@ protected:
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
 
 	void StartInteract();
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Menu", Meta = (BlueprintProtected = "true"))
+	TSubclassOf<UUserWidget> Menu;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Menu", Meta = (BlueprintProtected = "true"))
+	UUserWidget* CurrentWidget;
 
 protected:
 	// APawn interface
@@ -152,7 +167,10 @@ private:
 	TArray<AActor*> Interactables;
 
 	UPROPERTY()
-	TArray<FItemInfo> Inventory;
+	bool IsMenuOpen;
+
+	UFUNCTION()
+	void OnOffMenu();
 
 public:
 	/** Returns CameraBoom subobject **/

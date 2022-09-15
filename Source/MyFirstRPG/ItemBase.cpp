@@ -2,7 +2,6 @@
 
 
 #include "ItemBase.h"
-#include "Kismet/GameplayStatics.h"
 #include "MyFirstRPGCharacter.h"
 
 // Sets default values
@@ -12,16 +11,16 @@ AItemBase::AItemBase()
 	PrimaryActorTick.bCanEverTick = true;
 
 	// ItemInfo 데이터 테이블 불러오기
-	const FString ItemInfoPath = TEXT("DataTable'/Game/Items/DT_ItemInfo.DT_ItemInfo'");
+	const FString ItemInfoPath = TEXT("DataTable'/Game/Items/DT_Item.DT_Item'");
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_ItemInfo(*ItemInfoPath);
 	if (DT_ItemInfo.Succeeded())
 	{
-		UE_LOG(LogTemp, Display, TEXT("Success: load DT_ItemInfo"));
+		UE_LOG(LogTemp, Display, TEXT("Success: load DT_Item"));
 		DataTable = DT_ItemInfo.Object;
 	}
 	else
 	{
-		UE_LOG(LogTemp, Error, TEXT("Fail: load DT_ItemInfo"));
+		UE_LOG(LogTemp, Error, TEXT("Fail: load DT_Item"));
 	}
 }
 
@@ -34,7 +33,7 @@ void AItemBase::BeginPlay()
 	UEnum* ItemNames = FindObject<UEnum>(ANY_PACKAGE, TEXT("EItemNames"), true);
 	FName ItemName = FName(ItemNames->GetNameStringByValue((int32)RowName));
 	
-	ItemInfo = *DataTable->FindRow<FItemInfo>(ItemName, TEXT(""));
+	ItemInfo.ItemDataTable = *DataTable->FindRow<FItemDataTable>(ItemName, TEXT(""));
 }
 
 // Called every frame

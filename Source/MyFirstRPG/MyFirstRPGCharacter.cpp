@@ -78,6 +78,7 @@ void AMyFirstRPGCharacter::SetupPlayerInputComponent(class UInputComponent* Play
 
 	// 추가한 key bindings
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AMyFirstRPGCharacter::StartInteract);
+	PlayerInputComponent->BindAction("Menu", IE_Pressed, this, &AMyFirstRPGCharacter::OnOffMenu);
 }
 
 void AMyFirstRPGCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
@@ -139,6 +140,7 @@ void AMyFirstRPGCharacter::BeginPlay()
 	SphereCollider->OnComponentBeginOverlap.AddDynamic(this, &AMyFirstRPGCharacter::OnOverlapBegin);
 	SphereCollider->OnComponentEndOverlap.AddDynamic(this, &AMyFirstRPGCharacter::OnOverlapEnd);
 
+	CurrentWidget = CreateWidget<UUserWidget>(GetWorld(), Menu);
 }
 
 void AMyFirstRPGCharacter::StartInteract()
@@ -150,6 +152,36 @@ void AMyFirstRPGCharacter::StartInteract()
 	{
 		InteractInterface->Interact();
 	}
+}
+
+void AMyFirstRPGCharacter::OnOffMenu()
+{
+	APlayerController* PlayerController = GetLocalViewingPlayerController();
+
+	if (!IsMenuOpen)
+	{
+		// 메뉴를 화면에 활성화
+		CurrentWidget->AddToViewport();
+
+		// 마우스 커서, 인풋 모드 설정
+		PlayerController->SetShowMouseCursor(true);
+		UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(PlayerController, CurrentWidget);
+	
+		GetWorldSettings()->SetTimeDilation(0.25f);
+	}
+	else
+	{
+		// 메뉴를 화면에서 비활성화
+		CurrentWidget->RemoveFromParent();
+
+		// 마우스 커서, 인풋 모드 설정
+		PlayerController->SetShowMouseCursor(false);
+		UWidgetBlueprintLibrary::SetInputMode_GameOnly(PlayerController);
+
+		GetWorldSettings()->SetTimeDilation(1.0f);
+	}
+
+	IsMenuOpen = !IsMenuOpen;
 }
 
 int AMyFirstRPGCharacter::GetCurrentLevel() const
@@ -225,9 +257,9 @@ void AMyFirstRPGCharacter::PickUpItem(const FItemInfo& PickItemInfo)
 	int32 ItemIndex = -1;
 	for (const FItemInfo& InvenItemInfo : Inventory)
 	{
-		if (InvenItemInfo.Name == PickItemInfo.Name && InvenItemInfo.CurrentStack < InvenItemInfo.MaxStack)
+		if (InvenItemInfo.ItemDataTable.Name == PickItemInfo.ItemDataTable.Name && InvenItemInfo.ItemDataTable.CurrentStack < InvenItemInfo.ItemDataTable.MaxStack)
 		{
-			ItemIndex = InvenItemInfo.Index;
+			ItemIndex = InvenItemInfo.ItemDataTable.Index;
 			break;
 		}
 	}
@@ -237,12 +269,12 @@ void AMyFirstRPGCharacter::PickUpItem(const FItemInfo& PickItemInfo)
 	{
 		FItemInfo newItemInfo = PickItemInfo;
 		int32 Index = Inventory.Add(newItemInfo);
-		newItemInfo.Index = Index;
+		newItemInfo.ItemDataTable.Index = Index;
 	}
 	// 있다면?
 	else
 	{
-		Inventory[ItemIndex].CurrentStack++;
+		Inventory[ItemIndex].ItemDataTable.CurrentStack++;
 	}
 }
 
