@@ -4,6 +4,10 @@
 #include "ItemBase.h"
 #include "MyFirstRPGCharacter.h"
 
+FItemDataTable::FItemDataTable()
+: Name(EItemNames::None), Type(EItemTypes::None), MaxCount(0), Potency(0), Price(0), SelfValue(0)
+{}
+
 // Sets default values
 AItemBase::AItemBase()
 {
@@ -48,5 +52,6 @@ void AItemBase::Interact()
 	ACharacter* Player = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
 	AMyFirstRPGCharacter* PlayerScript = Cast<AMyFirstRPGCharacter>(Player);
 	PlayerScript->PickUpItem(ItemInfo);
+	
 	Destroy();
 }

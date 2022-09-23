@@ -1,7 +1,7 @@
-행 이름,Name,CurrentStack,MaxStack,Index,Type,Potency,Price,SelfValue
-HealthPotion,HealthPotion,1,99,0,Health,25,35,15
-ManaPotion,ManaPotion,1,99,0,Mana,25,50,20
-RustedSword,RustedSword,1,1,0,Sword,5,200,75
-IronSword,IronSword,1,1,0,Sword,10,350,0
-WoodShield,WoodShield,1,1,0,Shield,10,100,25
-IronShield,IronShield,1,1,0,Shield,20,250,100
+행 이름,Name,MaxCount,Type,Potency,Price,SelfValue
+HealthPotion,HealthPotion,99,Health,25,35,15
+ManaPotion,ManaPotion,99,Mana,25,50,20
+RustedSword,RustedSword,1,Sword,5,200,75
+IronSword,IronSword,1,Sword,10,350,0
+WoodShield,WoodShield,1,Shield,10,100,25
+IronShield,IronShield,1,Shield,20,250,100

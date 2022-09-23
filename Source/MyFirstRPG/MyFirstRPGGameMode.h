@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+
+#include "Inventory.h"
+
 #include "MyFirstRPGGameMode.generated.h"
 
 UCLASS(minimalapi)
@@ -16,12 +19,19 @@ class AMyFirstRPGGameMode : public AGameModeBase
 public:
 	AMyFirstRPGGameMode();
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	TSubclassOf<UUserWidget> BP_Inventory;
+
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Stat", Meta = (BlueprintProtected = "true"))
 	TSubclassOf<class UUserWidget> PlayerHUDClass;
 
 	UPROPERTY()
 	class UUserWidget* CurrentWidget;
+
+private:
+	UPROPERTY()
+	UInventory* Inventory;
 };
 
 

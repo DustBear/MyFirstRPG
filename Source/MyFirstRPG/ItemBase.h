@@ -16,7 +16,7 @@ enum class EItemTypes : uint8
 
 UENUM(BlueprintType)
 enum class EItemNames : uint8
-{ HealthPotion, ManaPotion, RustedSword, IronSword, WoodShield, IronShield };
+{ None, HealthPotion, ManaPotion, RustedSword, IronSword, WoodShield, IronShield };
 
 USTRUCT(BlueprintType)
 struct FItemDataTable : public FTableRowBase
@@ -24,22 +24,16 @@ struct FItemDataTable : public FTableRowBase
 	GENERATED_BODY()
 
 public:
-	FItemDataTable() {}
+	FItemDataTable();
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	EItemNames Name;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	int32 CurrentStack;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	int32 MaxStack;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	int32 Index;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	EItemTypes Type;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	int32 MaxCount;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float Potency;

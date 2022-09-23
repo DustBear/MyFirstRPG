@@ -1,17 +1,17 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "InventoryIcon.h"
+#include "EquipmentSlot.h"
 #include "MyFirstRPGCharacter.h"
 
-void UInventoryIcon::OnClickEvent()
+void UEquipmentSlot::OnClickEvent()
 {
-    if (ItemCount == 0)
+    if (ItemInfo.ItemDataTable.MaxCount == 0)
     {
         return;
     }
 
-    // 더블 클릭 시 아이템 사용
+    // 더블 클릭 시 아이템 해제
     ClickCount++;
     if (ClickCount == 2)
     {
@@ -21,15 +21,18 @@ void UInventoryIcon::OnClickEvent()
             UE_LOG(LogTemp, Error, TEXT("Player is nullptr"));
             return;
         }
-        Player->UseItem(ItemInfo, SlotIndex);
+        Player->PickUpItem(ItemInfo);
+
+        FItemInfo newItemInfo;
+        UpdateItemInfo(newItemInfo);
 
         ClickCount = 0;
     }
 }
 
-void UInventoryIcon::OnReleaseEvent()
+void UEquipmentSlot::OnReleaseEvent()
 {
-    if (ItemCount == 0)
+    if (ItemInfo.ItemDataTable.MaxCount == 0)
     {
         return;
     }
@@ -42,12 +45,9 @@ void UInventoryIcon::OnReleaseEvent()
     }), ClickDelayTime, false);
 }
 
-void UInventoryIcon::UpdateButtonImage()
+void UEquipmentSlot::UpdateItemInfo(const FItemInfo& NewItemInfo)
 {
-    if (Button == nullptr)
-    {
-        SetButton();
-    }
+    ItemInfo = NewItemInfo;
 
     FButtonStyle ButtonStyle;
     FSlateBrush SlateBrush;
@@ -61,33 +61,14 @@ void UInventoryIcon::UpdateButtonImage()
     SlateBrush.TintColor = FSlateColor(FColor(0.1, 0.1, 0.1));
     ButtonStyle.Hovered = SlateBrush;
     
+    if (Button == nullptr)
+    {
+        SetButton();
+    }
     Button->SetStyle(ButtonStyle);
 }
 
-//////////////////////////////////////////////////////////////////////////
-// Getter Setter
-
-void UInventoryIcon::AddItemCount(const int32 Amount)
-{
-    ItemCount += Amount;
-}
-
-const int32 UInventoryIcon::GetItemCount() const
-{
-    return ItemCount;
-}
-
-void UInventoryIcon::SetSlotIndex(const int32 Index)
-{
-    SlotIndex = Index;
-}
-
-void UInventoryIcon::SetItemInfo(const FItemInfo& NewItemInfo)
-{
-    ItemInfo = NewItemInfo;
-}
-
-const FItemInfo UInventoryIcon::GetItemInfo() const
+const FItemInfo UEquipmentSlot::GetItemInfo() const
 {
     return ItemInfo;
 }

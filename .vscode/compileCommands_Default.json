@@ -65,12 +65,12 @@
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
 	},
 	{
-		"file": "C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\Source\\MyFirstRPG\\Menu.cpp",
+		"file": "C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\Source\\MyFirstRPG\\Inventory.cpp",
 		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\.vscode\\compileCommands_Default\\MyFirstRPG.211.rsp",
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
 	},
 	{
-		"file": "C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\Source\\MyFirstRPG\\Menu.h",
+		"file": "C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\Source\\MyFirstRPG\\Inventory.h",
 		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\.vscode\\compileCommands_Default\\MyFirstRPG.211.rsp",
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
 	},
@@ -81,6 +81,26 @@
 	},
 	{
 		"file": "C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\Source\\MyFirstRPG\\InventoryIcon.h",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\.vscode\\compileCommands_Default\\MyFirstRPG.211.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\Source\\MyFirstRPG\\EquipmentSlot.cpp",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\.vscode\\compileCommands_Default\\MyFirstRPG.211.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\Source\\MyFirstRPG\\EquipmentSlot.h",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\.vscode\\compileCommands_Default\\MyFirstRPG.211.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\Source\\MyFirstRPG\\EquipmentWidget.cpp",
+		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\.vscode\\compileCommands_Default\\MyFirstRPG.211.rsp",
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\Source\\MyFirstRPG\\EquipmentWidget.h",
 		"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe\" @C:\\Users\\yaho166442\\Desktop\\UnrealProject\\MyFirstRPG\\.vscode\\compileCommands_Default\\MyFirstRPG.211.rsp",
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
 	}

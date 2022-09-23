@@ -26,4 +26,7 @@ void AMyFirstRPGGameMode::BeginPlay()
 	
  	checkf(CurrentWidget != nullptr, TEXT("CurrentWidget is nullptr"));
  	CurrentWidget->AddToViewport();
+
+	//Inventory = CreateWidget<UInventory>(GetWorld(), BP_Inventory);
+	//Inventory->CreateInventory();
 }
