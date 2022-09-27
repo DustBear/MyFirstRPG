@@ -196,6 +196,12 @@ public:
 	 */
 	void TakeOffEquipment(const EItemTypes& EquipmentType, const bool IsChangeSword);
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void CamShift();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void CamReShift();
+
 private:
 	// 캐릭터 능력치
 	UPROPERTY(EditDefaultsOnly)

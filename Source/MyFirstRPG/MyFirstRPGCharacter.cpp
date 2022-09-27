@@ -255,6 +255,8 @@ void AMyFirstRPGCharacter::PutOnEquipment(const EItemTypes& EquipmentType, const
 
 				GetCharacterMovement()->bOrientRotationToMovement = false;
 				GetCharacterMovement()->bUseControllerDesiredRotation = true;
+
+				CamShift();
 			}
 			break;
 
@@ -289,6 +291,8 @@ void AMyFirstRPGCharacter::TakeOffEquipment(const EItemTypes& EquipmentType, con
 
 				GetCharacterMovement()->bOrientRotationToMovement = true;
 				GetCharacterMovement()->bUseControllerDesiredRotation = false;
+
+				CamReShift();
 			}
 			break;
 
