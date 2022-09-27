@@ -15,17 +15,21 @@ class MYFIRSTRPG_API UPlayerAnim : public UAnimInstance
 	GENERATED_BODY()
 
 public:
-	UPlayerAnim();
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
+	UPROPERTY(BlueprintReadOnly, Category = "Movement")
 	float Speed;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
+	UPROPERTY(BlueprintReadOnly, Category = "Movement")
 	float Direction;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
+	UPROPERTY(BlueprintReadOnly, Category = "Movement")
 	bool IsFall;
 
+	UPROPERTY(BlueprintReadOnly)
+	bool IsSwordDrawn;
+
+protected:
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
-	
+
+private:
+	APawn* Owner;
 };

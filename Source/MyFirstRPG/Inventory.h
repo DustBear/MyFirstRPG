@@ -40,20 +40,22 @@ public:
 	UFUNCTION()
 	void RemoveItem(int32 SlotIndex);
 
-protected:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	int32 RowSize;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	int32 ColSize;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TSubclassOf<UUserWidget> BP_InventorySlot;
-
-	UPROPERTY(BlueprintReadWrite)
-	UUniformGridPanel* InventoryGridPanel;
+	UFUNCTION()
+	const FItemInfo& GetItem(int32 SlotIndex) const;
 
 private:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	int32 RowSize;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	int32 ColSize;
+
+	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	UUniformGridPanel* InventoryGridPanel;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<UUserWidget> BP_InventorySlot;
+
 	UPROPERTY()
 	TArray<UInventoryIcon*> InventorySlots;
 };

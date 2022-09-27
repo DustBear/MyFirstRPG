@@ -87,7 +87,7 @@ void UInventoryIcon::SetItemInfo(const FItemInfo& NewItemInfo)
     ItemInfo = NewItemInfo;
 }
 
-const FItemInfo UInventoryIcon::GetItemInfo() const
+const FItemInfo &UInventoryIcon::GetItemInfo() const
 {
     return ItemInfo;
 }

@@ -148,6 +148,13 @@ void AMyFirstRPGCharacter::BeginPlay()
 
 	// 장비창 생성
 	EquipmentWidget = CreateWidget<UEquipmentWidget>(GetWorld(), BP_EquipmentWidget);
+
+	// 장비창 슬롯 초기화
+	EquipmentWidget->SetSwordSlot();
+	EquipmentWidget->SetShieldSlot();
+
+	// PlayerAnim 초기화
+	PlayerAnim = Cast<UPlayerAnim>(GetMesh()->GetAnimInstance());
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -158,78 +165,182 @@ void AMyFirstRPGCharacter::PickUpItem(const FItemInfo& ItemInfo)
 	Inventory->AddItem(ItemInfo);
 }
 
-void AMyFirstRPGCharacter::UseItem(const FItemInfo& ItemInfo, int32 ItemIndex)
+void AMyFirstRPGCharacter::UseItem(const FItemInfo& ItemInfo, const int32& ItemIndex)
 {
 	switch (ItemInfo.ItemDataTable.Type)
 	{
-		case EItemTypes::Health:
-			RestoreHealth(ItemInfo.ItemDataTable.Potency);
+		case EItemTypes::Health: case EItemTypes::Mana:
+			UsePotion(ItemInfo.ItemDataTable.Type, ItemIndex);
 			break;
-		case EItemTypes::Mana:
-			RestoreMana(ItemInfo.ItemDataTable.Potency);
-			break;
-		case EItemTypes::Sword:
-			ChangeSword(ItemInfo);
-			break;
-		case EItemTypes::Shield:
-			ChangeShield(ItemInfo);
+		case EItemTypes::Sword: case EItemTypes::Shield:
+			PutOnEquipment(ItemInfo.ItemDataTable.Type, ItemIndex);
 			break;
 		case EItemTypes::Key:
 			break;
 		case EItemTypes::Resource:
 			break;
 		default:
-			
+			UE_LOG(LogTemp, Warning, TEXT("Cannot use item"));
+			return;
+	}
+}
+
+void AMyFirstRPGCharacter::UsePotion(const EItemTypes& PotionType, const int32& PotionIndex)
+{
+	// 포션의 종류에 맞는 효과 적용
+	const int32 IncreaseAmount = Inventory->GetItem(PotionIndex).ItemDataTable.Potency;
+	switch (PotionType)
+	{
+		case EItemTypes::Health:
+			UpdateCurrentHealth(IncreaseAmount);
 			break;
+		case EItemTypes::Mana:
+			UpdateCurrentMana(IncreaseAmount);
+			break;
+		default:
+			UE_LOG(LogTemp, Warning, TEXT("Cannot use potion"));
+			return;
 	}
 
-	Inventory->RemoveItem(ItemIndex);
+	// 사용한 포션을 인벤토리에서 삭제 (개수 차감)
+	Inventory->RemoveItem(PotionIndex);
 }
 
-void AMyFirstRPGCharacter::RestoreHealth(float Amount)
+void AMyFirstRPGCharacter::PutOnEquipment(const EItemTypes& EquipmentType, const int32& EquipmentIndex)
 {
-	UpdateCurrentHealth(Amount);
+	const FItemInfo EquipmentInfo = Inventory->GetItem(EquipmentIndex);
+	
+	// 새로 착용할 장비를 인벤토리에서 삭제
+	Inventory->RemoveItem(EquipmentIndex);
+
+	// 새로 착용할 장비의 종류에 맞는 장비창 슬롯 탐색
+	UEquipmentSlot* EquipmentSlot = nullptr;
+	switch (EquipmentType)
+	{
+		case EItemTypes::Sword:
+			EquipmentSlot = EquipmentWidget->SwordSlot;
+			break;
+
+		case EItemTypes::Shield:
+			EquipmentSlot = EquipmentWidget->ShieldSlot;
+			break;
+
+		default:
+			UE_LOG(LogTemp, Warning, TEXT("Cannot find equipment slot"));
+			return;
+	}
+
+	// 장비창 슬롯에 이미 착용 중인 장비가 있다면 착용 해제
+	const bool IsEquipmentExist = EquipmentSlot->GetItemInfo().ItemDataTable.MaxCount != 0;
+	if (IsEquipmentExist)
+	{
+		TakeOffEquipment(EquipmentType, true);
+	}
+
+	// 새로 착용할 장비를 장비창 슬롯에 추가
+	EquipmentSlot->UpdateItemInfo(EquipmentInfo);
+
+	// 장비 장착
+	switch (EquipmentType)
+	{
+		case EItemTypes::Sword:
+			// Sword를 장착하지 않은 상태였다면 공격 모션을 취하면서 Sword 장착
+			if (IsEquipmentExist)
+			{
+				SpawnEquipment(Sword, EquipmentSlot, "SwordSlot");
+			}
+			else
+			{
+				PlayerAnim->IsSwordDrawn = true;
+
+				GetCharacterMovement()->bOrientRotationToMovement = false;
+				GetCharacterMovement()->bUseControllerDesiredRotation = true;
+			}
+			break;
+
+		case EItemTypes::Shield:
+			// Shield 장착
+			SpawnEquipment(Shield, EquipmentSlot, "ShieldSlot");
+			break;
+
+		default:
+			UE_LOG(LogTemp, Warning, TEXT("Cannot put on equipment"));
+			return;
+	}
 }
 
-void AMyFirstRPGCharacter::RestoreMana(float Amount)
+void AMyFirstRPGCharacter::TakeOffEquipment(const EItemTypes& EquipmentType, const bool IsChangeSword)
 {
-	UpdateCurrentMana(Amount);
+	UEquipmentSlot* EquipmentSlot = nullptr;
+	switch (EquipmentType)
+	{
+		case EItemTypes::Sword:
+			EquipmentSlot = EquipmentWidget->SwordSlot;
+
+			// Sword 교체가 목적이라면 단순히 Sword만 교체
+			if (IsChangeSword)
+			{
+				DestroyEquipment(Sword);
+			}
+			// Sword 교체가 아닌 해제 목적이라면 Sword를 해제 애니메이션 실행
+			else
+			{
+				PlayerAnim->IsSwordDrawn = false;
+
+				GetCharacterMovement()->bOrientRotationToMovement = true;
+				GetCharacterMovement()->bUseControllerDesiredRotation = false;
+			}
+			break;
+
+		case EItemTypes::Shield:
+			EquipmentSlot = EquipmentWidget->ShieldSlot;
+
+			// Shield 해제
+			DestroyEquipment(Shield);
+			break;
+
+		default:
+			UE_LOG(LogTemp, Warning, TEXT("Cannot take off equipment"));
+			return;
+	}
+
+	// 인벤토리 업데이트
+	Inventory->AddItem(EquipmentSlot->GetItemInfo());
+
+	// 장비창 업데이트
+	const FItemInfo emptyItemInfo;
+	EquipmentSlot->UpdateItemInfo(emptyItemInfo);
 }
 
-void AMyFirstRPGCharacter::ChangeSword(const FItemInfo& NewSwordInfo)
+void AMyFirstRPGCharacter::SpawnEquipment(AItemBase*& Equipment, const UEquipmentSlot* const EquipmentSlot, const FName SocketName)
 {
-	if (EquipmentWidget->SwordSlot == nullptr)
+	// 장비 장착
+	FTransform EquipmentTransform = GetMesh()->GetSocketTransform(SocketName, ERelativeTransformSpace::RTS_Actor);
+	Equipment = GetWorld()->SpawnActor<AItemBase>(EquipmentSlot->GetItemInfo().ItemBP, EquipmentTransform);
+	if (Equipment != nullptr)
 	{
-		EquipmentWidget->SetSwordSlot();
+		Equipment->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, SocketName);
 	}
 
-	// 장비창 슬롯에 아이템이 이미 있을 경우, 그 아이템을 인벤토리에 추가
-	const FItemInfo& ExistedSwordInfo = EquipmentWidget->SwordSlot->GetItemInfo();
-	if (ExistedSwordInfo.ItemDataTable.MaxCount != 0)
+	// 장비의 collision profile을 no collision으로 변경 
+	UActorComponent* Comp = Equipment->GetComponentByClass(UStaticMeshComponent::StaticClass());
+	UStaticMeshComponent* MeshComp = Cast<UStaticMeshComponent>(Comp);
+	if (MeshComp == nullptr)
 	{
-		PickUpItem(ExistedSwordInfo);
+		UE_LOG(LogTemp, Error, TEXT("Cannot find mesh component"));
+		return;
 	}
-
-	// 장비창 슬롯에 Sword 추가
-	EquipmentWidget->SwordSlot->UpdateItemInfo(NewSwordInfo);
+	MeshComp->SetCollisionProfileName(NoCollision.Name);
 }
 
-void AMyFirstRPGCharacter::ChangeShield(const FItemInfo& NewShieldInfo)
-{
-	if (EquipmentWidget->ShieldSlot == nullptr)
+void AMyFirstRPGCharacter::DestroyEquipment(AItemBase* Equipment)
+{	
+	if (Equipment == nullptr)
 	{
-		EquipmentWidget->SetShieldSlot();
+		UE_LOG(LogTemp, Error, TEXT("Cannot destroy equipment"));
+		return;
 	}
-
-	// 장비창 슬롯에 아이템이 이미 있을 경우, 그 아이템을 인벤토리에 추가
-	const FItemInfo& ExistedShieldInfo = EquipmentWidget->ShieldSlot->GetItemInfo();
-	if (ExistedShieldInfo.ItemDataTable.MaxCount != 0)
-	{
-		PickUpItem(ExistedShieldInfo);
-	}
-
-	// 장비창 슬롯에 Shield 추가
-	EquipmentWidget->ShieldSlot->UpdateItemInfo(NewShieldInfo);
+	Equipment->Destroy();
 }
 
 //////////////////////////////////////////////////////////////////////////

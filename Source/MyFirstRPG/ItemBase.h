@@ -51,13 +51,16 @@ struct FItemInfo
 	GENERATED_BODY()
 
 public:
-	FItemInfo() {}
+	FItemInfo();
 
 	UPROPERTY(BlueprintReadOnly)
 	FItemDataTable ItemDataTable;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	UTexture2D* ItemImage;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TSubclassOf<AItemBase> ItemBP;
 };
 
 UCLASS()

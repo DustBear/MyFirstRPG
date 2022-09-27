@@ -43,7 +43,7 @@ public:
 	void SetItemInfo(const FItemInfo& NewItemInfo);
 
 	UFUNCTION()
-	const FItemInfo GetItemInfo() const;
+	const FItemInfo& GetItemInfo() const;
 
 protected:
 	/** 버튼 Click시 ClickCount 증가. ClickCount가 2가 되면 슬롯에 보관되어 있는 아이템 사용 */

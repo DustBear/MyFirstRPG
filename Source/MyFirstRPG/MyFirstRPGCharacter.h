@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "PlayerAnim.h"
 #include "Inventory.h"
 #include "EquipmentWidget.h"
 #include "Components/SphereComponent.h"
@@ -126,7 +127,7 @@ public:
 
 public:
 	//////////////////////////////////////////////////////////////////////////
-	// Getter Setter
+	// 캐릭터 능력치 Getter Setter
 	UFUNCTION(BlueprintPure, Category = "Level")
 	const int32 GetCurrentLevel() const;
 
@@ -164,6 +165,70 @@ public:
 	const float GetMaxExp() const;
 
 	//////////////////////////////////////////////////////////////////////////
+	// 아이템 획득, 사용
+
+	UFUNCTION()
+	/**
+	 * 맵에 놓인 아이템을 주웠을때 호출됨
+	 * 인벤토리에 아이템 추가함
+	 * 
+	 * @param ItemInfo 획득한 아이템 정보
+	 */
+	void PickUpItem(const FItemInfo& ItemInfo);
+	
+	UFUNCTION()
+	/**
+	 * 인벤토리에 있는 아이템을 사용했을 때 호출됨
+	 * 인벤토리에서 아이템을 소모시키고 아이템의 종류에 맞는 효과를 플레이어에게 적용
+	 * 
+	 * @param ItemInfo 사용할 아이템의 정보
+	 * @param ItemIndex 사용할 아이템의 인벤토리 내의 위치
+	 */
+	void UseItem(const FItemInfo& ItemInfo, const int32& ItemIndex);
+
+	UFUNCTION()
+	/**
+	 * 장비창에서 장비를 해제할 때 호출됨
+	 * 장비창에서 장비를 제거하고 인벤토리에 장비를 추가함. 플레이어 Mesh에서도 장비를 제거  
+	 * 
+	 * @param EquipmentType 해제할 장비의 종류
+	 * @param IsChangeSword 장비를 해제하는 목적이 현재 착용중인 Sword를 다른 Sword로 교체하기 위함인지
+	 */
+	void TakeOffEquipment(const EItemTypes& EquipmentType, const bool IsChangeSword);
+
+private:
+	// 캐릭터 능력치
+	UPROPERTY(EditDefaultsOnly)
+	FCharacterStat Stat;
+
+	UPROPERTY()
+	UPlayerAnim* PlayerAnim;
+
+	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	AItemBase* Sword;
+
+	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	AItemBase* Shield;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	FCollisionProfileName NoCollision;
+
+	//////////////////////////////////////////////////////////////////////////
+	// 아이템 사용
+
+	UFUNCTION()
+	void UsePotion(const EItemTypes &PotionType, const int32 &PotionIndex);
+
+	UFUNCTION()
+	void PutOnEquipment(const EItemTypes &EquipmentType, const int32 &EquipementIndex);
+
+	UFUNCTION(BlueprintCallable, meta = (AllowPrivateAccess = "true"))
+	void SpawnEquipment(UPARAM(ref) AItemBase*& Equipment, const UEquipmentSlot* const EquipmentSlot, const FName SocketName);
+
+	UFUNCTION(BlueprintCallable, meta = (AllowPrivateAccess = "true"))
+	void DestroyEquipment(AItemBase* Equipment);
+
+	//////////////////////////////////////////////////////////////////////////
 	// 상호작용
 
 	UFUNCTION()
@@ -171,56 +236,6 @@ public:
 
 	UFUNCTION()
   	void OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-
-	//////////////////////////////////////////////////////////////////////////
-	// 아이템 획득, 사용
-
-	/**
-	 * 인벤토리에 아이템 추가
-	 * 
-	 * @param ItemInfo 획득한 아이템 정보
-	 */
-	UFUNCTION()
-	void PickUpItem(const FItemInfo& ItemInfo);
-	
-	/**
-	 * 아이템의 타입에 맞게 아이템 사용 및 효과 적용
-	 * 
-	 * @param ItemInfo 사용할 아이템의 정보
-	 * @param ItemIndex 인벤토리 내에서 사용할 아이템의 위치
-	 */
-	UFUNCTION()
-	void UseItem(const FItemInfo& ItemInfo, int32 ItemIndex);
-
-protected:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	TSubclassOf<UUserWidget> BP_Inventory;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	TSubclassOf<UUserWidget> BP_EquipmentWidget;
-
-private:
-	// 캐릭터 능력치
-	UPROPERTY(EditDefaultsOnly)
-	FCharacterStat Stat;
-
-	//////////////////////////////////////////////////////////////////////////
-	// 아이템 사용 시 효과 적용
-
-	UFUNCTION()
-	void RestoreHealth(float Amount);
-
-	UFUNCTION()
-	void RestoreMana(float Amount);
-
-	UFUNCTION()
-	void ChangeSword(const FItemInfo& ItemInfo);
-
-	UFUNCTION()
-	void ChangeShield(const FItemInfo& ItemInfo);
-
-	//////////////////////////////////////////////////////////////////////////
-	// 상호작용
 
 	/** Interactables에 있는 Actor 중 맨 앞 Actor를 꺼내서 Interact 시킴 */
 	UFUNCTION()
@@ -241,11 +256,16 @@ private:
 	UFUNCTION()
 	void OnOffWidget(EWidgetTypes WidgetType);
 
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UUserWidget> BP_Inventory;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UUserWidget> BP_EquipmentWidget;
+
 	UPROPERTY()
 	UInventory* Inventory;
 
-	// 장비창
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UEquipmentWidget* EquipmentWidget;
 
 	UPROPERTY()

@@ -89,3 +89,8 @@ void UInventory::RemoveItem(int32 SlotIndex)
     }
 }
 
+const FItemInfo &UInventory::GetItem(int32 SlotIndex) const
+{
+    return InventorySlots[SlotIndex]->GetItemInfo();
+}
+

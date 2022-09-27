@@ -8,6 +8,13 @@ FItemDataTable::FItemDataTable()
 : Name(EItemNames::None), Type(EItemTypes::None), MaxCount(0), Potency(0), Price(0), SelfValue(0)
 {}
 
+FItemInfo::FItemInfo()
+: ItemImage(nullptr)
+{
+	FItemDataTable EmptyItemDataTable;
+	ItemDataTable = EmptyItemDataTable;
+}
+
 // Sets default values
 AItemBase::AItemBase()
 {

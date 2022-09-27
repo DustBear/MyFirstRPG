@@ -11,8 +11,8 @@ void UEquipmentSlot::OnClickEvent()
         return;
     }
 
-    // 더블 클릭 시 아이템 해제
     ClickCount++;
+    // 더블 클릭 시
     if (ClickCount == 2)
     {
         AMyFirstRPGCharacter *Player = Cast<AMyFirstRPGCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
@@ -21,10 +21,9 @@ void UEquipmentSlot::OnClickEvent()
             UE_LOG(LogTemp, Error, TEXT("Player is nullptr"));
             return;
         }
-        Player->PickUpItem(ItemInfo);
-
-        FItemInfo newItemInfo;
-        UpdateItemInfo(newItemInfo);
+        
+        // 장착된 장비 해제
+        Player->TakeOffEquipment(ItemInfo.ItemDataTable.Type, false);
 
         ClickCount = 0;
     }
