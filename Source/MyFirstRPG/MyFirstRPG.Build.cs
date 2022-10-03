@@ -9,5 +9,8 @@ public class MyFirstRPG : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "UMG", "SlateCore" });
+
+		PrivateIncludePaths.Add("MyFirstRPG");
+		PublicIncludePaths.Add("MyFirstRPG");
 	}
 }

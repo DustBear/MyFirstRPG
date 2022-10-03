@@ -1,7 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "MyFirstRPGGameMode.h"
-#include "MyFirstRPGCharacter.h"
+#include "Player/MyFirstRPGCharacter.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Blueprint/UserWidget.h"
 #include "Kismet/GameplayStatics.h"
@@ -21,12 +21,12 @@ void AMyFirstRPGGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
- 	checkf(PlayerHUDClass != nullptr, TEXT("PlayerHUDClass is nullptr"));
- 	CurrentWidget = CreateWidget<UUserWidget>(GetWorld(), PlayerHUDClass);
-	
- 	checkf(CurrentWidget != nullptr, TEXT("CurrentWidget is nullptr"));
+	// BP_PlayerInfo를 생성하여 화면에 활성화
+ 	UUserWidget* const CurrentWidget = CreateWidget<UUserWidget>(GetWorld(), BP_PlayerInfo);
+	if (CurrentWidget == nullptr)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Cannot create PlayerHUD"));
+		return;
+	}
  	CurrentWidget->AddToViewport();
-
-	//Inventory = CreateWidget<UInventory>(GetWorld(), BP_Inventory);
-	//Inventory->CreateInventory();
 }
